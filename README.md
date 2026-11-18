@@ -39,3 +39,10 @@ in terminals that do not switch to a CJK locale.
 Control characters are not special-cased.  A newline or tab is counted with its
 natural width (one), not as zero or as a tab stop.  Measure one logical line at
 a time, or strip control characters yourself first.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
